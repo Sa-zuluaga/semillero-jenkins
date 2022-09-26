@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                git 'https://github.com/Sa-zuluaga/semillero-jenkins.git'
                 echo 'Building..'
             }
         }
