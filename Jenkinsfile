@@ -25,10 +25,5 @@ pipeline {
                 }
             }
         }
-        stage('Sonar') {
-            steps {
-                bat "gradlew sonarqube"
-            }
-        }
     }
 }
