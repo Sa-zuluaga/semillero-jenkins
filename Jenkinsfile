@@ -8,7 +8,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                withGradle()    {
+                withGradle() {
                      sh './gradlew clean'
                      sh './gradlew build -x test'
                 }
@@ -17,7 +17,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
-                withGradle{
+                withGradle(){
     {               sh "./gradlew test"
                     sh "./gradlew jacocoTestReport"
                 }
