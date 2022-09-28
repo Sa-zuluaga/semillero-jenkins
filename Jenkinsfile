@@ -4,9 +4,6 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                withGradle() {
-                     sh './gradlew clean'
-                     sh './gradlew build -x test'
                 }
             }
         }
