@@ -24,7 +24,7 @@ pipeline {
                     }
                 }
             }
-        stage('Sonar')
+        stage('Sonar') {
             steps {
                 bat "gradlew sonarqube"
             {
