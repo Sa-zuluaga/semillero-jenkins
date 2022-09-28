@@ -13,10 +13,6 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
-                withGradle() {
-                    sh "./gradlew test"
-                    sh "./gradlew jacocoTestReport"
-                }
             }
         }
         stage('Deploy') {
