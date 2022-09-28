@@ -20,16 +20,11 @@ pipeline {
             steps {
                 withSonarQubeEnv(installationName: 'SonarCloud') {
                     script {
-                        bat "gradlew sonarqube -Dsonar.branch.name=master"
+                        bat "gradlew sonarqube -Dsonar.branch.name=main"
                     }
                 }
             }
         }
-        stage("Quality Gate") {
-            steps {
-                timeout(5) {
-                    waitForQualityGate abortPipeline: true
-                }
             }
         }
     }
