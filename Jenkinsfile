@@ -1,20 +1,35 @@
 pipeline {
-    agent any
+    agent {label "windows"}
     stages {
-        stage('Build') {
+        stage('build') {
             steps {
-                echo 'Building...'
-
+                bat 'gradlew clean build -x test'
             }
         }
-        stage('Test') {
+        stage('test') {
             steps {
-                echo 'Testing..'
+                bat "gradlew test"
             }
         }
-        stage('Deploy') {
+        stage('coverage') {
             steps {
-                echo 'Deploying....'
+                bat 'gradlew jacocoTestReport'
+            }
+        }
+        stage('Analisis de SonarQube') {
+            steps {
+                withSonarQubeEnv(installationName: 'SonarCloud') {
+                    script {
+                        bat "gradlew sonarqube -Dsonar.branch.name=${BRANCH_NAME}"
+                    }
+                }
+            }
+        }
+        stage("Quality Gate") {
+            steps {
+                timeout(5) {
+                    waitForQualityGate abortPipeline: true
+                }
             }
         }
     }
