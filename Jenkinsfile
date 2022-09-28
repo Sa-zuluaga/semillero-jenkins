@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    tools {
-        gradlew
-    }
-
     stages {
         stage('Build') {
             steps {
@@ -17,8 +13,8 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
-                withGradle(){
-    {               sh "./gradlew test"
+                withGradle() {
+                    sh "./gradlew test"
                     sh "./gradlew jacocoTestReport"
                 }
             }
